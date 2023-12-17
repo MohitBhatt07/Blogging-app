@@ -10,6 +10,16 @@ router.get("/login", (req,res)=>{
   return res.render('login');
 }
 );
+router.post('/login' , async(req,res)=>{
+  const {email,password}  = req.body;
+  try{
+    const token = await User.matchpasswordAndGenerateToken(email,password);
+    return res.cookie("token" , token).redirect('/' ,{user});
+  }catch(error){
+    return  res.render('login' , {error});
+  }
+  
+})
 
 router.post("/signup", async (req, res) => {
   const { fullName, email, password } = req.body;

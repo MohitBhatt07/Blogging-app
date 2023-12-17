@@ -2,9 +2,10 @@ const express = require("express");
 const path = require("path");
 const userRouter = require("./routes/userRoutes");
 const mongoose = require("mongoose");
-
+const dotenv = require("dotenv");
 const app = express();
 const PORT = 7000;
+dotenv.config();
 mongoose
   .connect("mongodb://localhost:27017/blogIt")
   .then((e) => console.log("MongoDB connected successfully "));
