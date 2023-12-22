@@ -9,22 +9,31 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Mohit Bhatt
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Logout</a></li>
-            <li><a class="dropdown-item" href="#"></a></li>
-            
-          </ul>
-        </li>
+        <% if (locals.user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Add Blog</a>
+          </li>
+        <% } %>
+        
+        <% if (locals.user) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Mohit Bhatt
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+              
+              
+            </ul>
+          </li>
+        <% } %>
+       <% } else { %>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/user/login">Login</a></li>
+        </ul>
+          
+        <% } %>
+        
       </ul>
     </div>
   </div>

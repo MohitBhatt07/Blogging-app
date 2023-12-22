@@ -1,5 +1,5 @@
 const JWT = require("jsonwebtoken");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 const secret = process.env.JWT_SECRET;
 
@@ -10,10 +10,8 @@ function createTokenForUser(user) {
     profileImgUrl: user.profileImgUrl,
     email: user.email,
   };
-  const options = {
-    expiresIn: "1d",
-  };
-  const token = JWT.sign(payload, secret, options);
+  
+  const token = JWT.sign(payload, secret);
   return token;
 }
 

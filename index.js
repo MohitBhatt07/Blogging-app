@@ -2,21 +2,26 @@ const express = require("express");
 const path = require("path");
 const userRouter = require("./routes/userRoutes");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+
+const { checkForAuthentication } = require("./middlewares/authenticationMiddleware");
+
+
 const app = express();
 const PORT = 7000;
-dotenv.config();
 mongoose
   .connect("mongodb://localhost:27017/blogIt")
   .then((e) => console.log("MongoDB connected successfully "));
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
-
+app.use(cookieParser());
+app.use(checkForAuthentication("token"));
 app.get("/", (req, res, next) => {
-  return res.render("homepage");
+   res.render("homepage" ,{user : req.user});
 });
 app.use("/user", userRouter);
 
