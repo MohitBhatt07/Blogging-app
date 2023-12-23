@@ -18,19 +18,21 @@
         <% if (locals.user) { %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             Mohit Bhatt
+             <%= user.fullName %>
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
               
-              
             </ul>
           </li>
-        <% } %>
-       <% } else { %>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/user/login">Login</a></li>
-        </ul>
+        
+        <% } else { %>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/user/signup">Create Account</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
+        
           
         <% } %>
         

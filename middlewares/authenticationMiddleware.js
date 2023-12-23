@@ -2,11 +2,9 @@ const { validateToken } = require("../services/authentication");
 
 function checkForAuthentication(cookieName){
   return (req,res,next)=>{
-    
     const tokenValue = req.cookies[cookieName];
-    console.log(tokenValue);
     if(!tokenValue)
-      next();
+      return next();
 
     try{
       const userPayload = validateToken(tokenValue);
