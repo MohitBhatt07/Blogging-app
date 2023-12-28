@@ -5,11 +5,35 @@
     <title>ADD BLOG</title>
   </head>
   <body>
-    <%- include('./partials/script') %>
-    <%- include('./partials/nav') %>
-    <div class="m-5 ">
-      <label for="formGroupExampleInput" class="form-label">ADD TITLE</label>
-      <input type="text" class="form-control mx-2" id="formGroupExampleInput" placeholder="Enter the title of blog">
-    </div>
+    <%- include('./partials/script') %> <%- include('./partials/nav') %>
+    <form class="p-4" action="/blog/addnew" method="post" enctype="multipart/form-data">
+      <div class="m-5 w-50">
+        <label for="title" class="form-label">ADD TITLE</label>
+        <input
+          type="text"
+          class="form-control mx-2"
+          id="title"
+          name="title"
+          placeholder="Enter the title of blog"
+        />
+      </div>
+      <div class="m-5 w-50">
+        <label for="coverImage" class="form-label">Cover Image</label>
+        <input class="form-control mx-2" type="file" id="coverImage" name="coverImage">
+      </div>
+      <div class="m-5 w-50">
+        <label for="content" class="form-label">CONTENT</label>
+        <textarea
+          type="text"
+          style="height: 100px"
+          class="form-control mx-2"
+          id="content"
+          name="content"
+          placeholder="Enter the content of blog"
+        >
+        </textarea>
+      </div>   
+      <button type="submit" class="btn btn-success ms-5">Upload</button>
+    </form>
   </body>
 </html>

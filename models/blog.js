@@ -5,6 +5,10 @@ const blogSchema = new Schema({
     type : String,
     required : true
   },
+  content : { 
+    type : String,
+    required  : true,
+  },
   coverImageUrl :{
     type : String,
     required : false,
