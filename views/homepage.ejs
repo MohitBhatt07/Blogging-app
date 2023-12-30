@@ -7,6 +7,18 @@
   <body>
     <%- include('./partials/script') %>
     <%- include('./partials/nav') %>
-    <%= JSON.stringify(user) %>
+    <div class="container row row-cols-2 m-2">
+      <% allBlogs.forEach(blog => { %>
+        <div class="card mt-2 mx-3 " style="width: 18rem;">
+          <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt=""  width="300px">
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title %></h5>
+            
+            <a href="/blog/<%= blog._id %>" class="btn btn-primary">View Blog</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
   </body>
 </html>
