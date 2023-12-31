@@ -2,8 +2,7 @@ const express = require("express");
 const { blog } = require("../models/blog");
 const multer = require("multer");
 const router = express.Router();
-const path = require("path");
-const User = require("../models/user");
+const path = require('path');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -20,24 +19,12 @@ router.get("/addnew", (req, res) => {
   res.render("addBlog", { user: req.user });
 });
 
-router.get('/:id' , async(req,res)=>{
-  const findBlog =  await blog.findById(req.params.id);
-  const blogCreator = await User.findById(findBlog.createdBy);
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const blogDate =  findBlog.createdAt.toLocaleDateString('en-US', options).toUpperCase();
-  return res.render('blog' ,{ blog  :findBlog, blogDate : blogDate,blogCreator : blogCreator,user : req.user} );
-});
-
-router.post("/addnew", upload.single("coverImage"), async (req, res) => {
-  const {title,content}= req.body;
-
-  const newBlog = await blog.create({
-    title,
-    content,
-    createdBy: req.user._id,
-    coverImageUrl: `/uploads/${req.file.filename}`,
-  });
-  return res.redirect(`/blog/${newBlog._id}`);
+router.post('/addnew',upload.single('coverImage'),async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+  res.redirect("/");
+  // const {title , content ,coverImage}  = req.body;
+  // const newBlog = await blog.create({title: title, content: content });
   // return res.json({ "blog" : newBlog ,"msg" :"blog is created"});
 });
 module.exports = router;
