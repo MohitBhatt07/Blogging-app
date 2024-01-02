@@ -1,0 +1,41 @@
+<main class="container p-4">
+  <h2 class="h2 mb-4">Comments</h2>
+  <form class="mb-4" method="post" action="/blog/comment/<%= blog._id %>">
+    <label for="content" class="form-label">Leave a Comment</label>
+    <textarea
+      class="form-control"
+      placeholder="Type your comment here..."
+      id="content"
+      rows="3"
+      name="content"
+    ></textarea>
+    <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+  </form>
+  <% comments.forEach(comment => { %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <img src="<%= comment.createdBy.profileImgUrl %>" width="40px" class="rounded-circle border" alt="User Avatar" />
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="fw-bold"><%= comment.createdBy.fullName %></div>
+                <div class="text-muted text-small">2 hours ago</div>
+              </div>
+              <p class="mt-2">
+                <%= comment.content %>
+              </p>
+              <button class="btn btn-sm btn-outline-primary mt-2">Reply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-4"></div>
+    </div>
+  </div>
+  <% }) %>
+  <button class="btn btn-primary mx-auto">Load More</button>
+</main>
