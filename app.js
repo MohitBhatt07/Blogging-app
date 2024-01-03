@@ -7,11 +7,13 @@ const blogRouter = require("./routes/blogRoutes");
 const { checkForAuthentication } = require("./middlewares/authenticationMiddleware");
 const { blog } = require("./models/blog");
 
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
-const PORT = 7000;
+const PORT = process.env.PORT || 8000;
 mongoose
-  .connect("mongodb://localhost:27017/blogIt")
+  .connect(process.env.MONGO_URL)
   .then((e) => console.log("MongoDB connected successfully "));
 
 app.use(express.urlencoded({ extended: false }));

@@ -23,7 +23,8 @@ router.get("/addnew", (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const findBlog = await blog.findById(req.params.id).populate("createdBy");
-
+  let errorMessage = req.query.error;
+  console.log(errorMessage);
   const options = {
     weekday: "long",
     year: "numeric",
@@ -36,13 +37,14 @@ router.get("/:id", async (req, res) => {
   const comments = await Comment.find({ blogId: req.params.id }).populate(
     "createdBy"
   );
-  console.log(comments);
+
   return res.render("blog", {
     blog: findBlog,
     blogDate: blogDate,
     blogCreator: findBlog.createdBy,
     user: req.user,
     comments: comments,
+    error : errorMessage,
   });
 });
 
@@ -60,6 +62,11 @@ router.post("/addnew", upload.single("coverImage"), async (req, res) => {
 
 router.post("/comment/:blogId", async (req, res) => {
   const { content } = req.body;
+  const findEntry = await Comment.findOne({createdBy : req.user._id});
+  if(findEntry){
+    const errorMessage = encodeURIComponent("Entry already exists");
+    return res.redirect(`/blog/${req.params.blogId}?error=${errorMessage}`);
+  }
   const comment = await Comment.create({
     content: content,
     createdBy: req.user._id,

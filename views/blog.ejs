@@ -9,6 +9,12 @@
 <body>
   <%- include('./partials/script') %>
   <%- include('./partials/nav') %>
+  <% if (locals.error) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+  
   <div class="mt-4 container">
     <p class="text-success fw-bold"><%= blogDate %></p>
     <div class="d-flex align-items-center gap-3"> 
@@ -18,8 +24,7 @@
     <h1 class="mb-4"><%= blog.title%></h1>
     
       <img src="<%= blog.coverImageUrl%>"  style="max-width: 800px; min-width: 400px;"/>
-    
-    <pre width="800px" style="white-space: pre-wrap; margin-top: 20px;"><%= blog.content %></pre>    
+      <pre width="800px" style="white-space: pre-wrap; margin-top: 20px;"><%= blog.content %></pre>    
 
     <%- include('./partials/comment') %>
   </div>

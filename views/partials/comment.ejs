@@ -1,5 +1,5 @@
 <main class="container p-4">
-  <h2 class="h2 mb-4">Comments</h2>
+  <h2 class="h2 mb-4">Comments (<%= comments.length %>)</h2>
   <form class="mb-4" method="post" action="/blog/comment/<%= blog._id %>">
     <label for="content" class="form-label">Leave a Comment</label>
     <textarea
